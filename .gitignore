@@ -26,3 +26,28 @@
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 
+.env
+config/master.key
+# Env
+.env
+.env.*
+!.env.example
+
+# Rails credentials
+config/master.key
+config/credentials/*.key
+
+# Logs & tmp
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Storage
+/storage/*
+!/storage/.keep
+
+# Autres
+.DS_Store
+*.swp
+node_modules/
