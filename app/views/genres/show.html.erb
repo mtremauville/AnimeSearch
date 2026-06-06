@@ -1,2 +1,30 @@
-<h1>Genres#show</h1>
-<p>Find me in app/views/genres/show.html.erb</p>
+<div class="browse-page">
+  <div class="browse-header">
+    <%= link_to "← Retour aux genres", genres_path, class: "back-link" %>
+    <h1><%= @genre.name %></h1>
+    <p><%= @animes.count %> animes</p>
+  </div>
+
+  <div class="anime-grid">
+    <% @animes.each do |anime| %>
+      <%= link_to anime_path(anime), class: "anime-card" do %>
+        <img src="<%= anime.image_url %>" alt="<%= anime.title %>" loading="lazy">
+        <div class="anime-card__body">
+          <div class="anime-card__title"><%= anime.title %></div>
+          <% if anime.title_english.present? && anime.title_english != anime.title %>
+            <div class="anime-card__sub"><%= anime.title_english %></div>
+          <% end %>
+          <div class="anime-card__tags">
+            <% anime.genres.first(2).each do |g| %>
+              <span class="tag tag--genre"><%= g.name %></span>
+            <% end %>
+          </div>
+          <div class="anime-card__footer">
+            <span class="score">★ <%= anime.score || "N/A" %></span>
+            <span class="episodes"><%= anime.episodes ? "#{anime.episodes} ep." : anime.year %></span>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
