@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Anime Search" %></title>
+    <title>AnimeSearch</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Anime Search">
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="algolia-app-id"     content="<%= ENV['ALGOLIA_APP_ID'] %>">
+    <meta name="algolia-search-key" content="<%= ENV['ALGOLIA_SEARCH_ONLY_KEY'] %>">
+    <meta name="algolia-index"      content="animes_<%= Rails.env %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
+    <nav class="nav">
+      <%= link_to root_path, class: "nav-brand" do %>
+        <span class="nav-dot"></span>
+        AnimeSearch
+      <% end %>
+      <div class="nav-links">
+        <%= link_to "Animes",  animes_path,  class: ("active" if controller_name == "animes") %>
+        <%= link_to "Genres",  genres_path,  class: ("active" if controller_name == "genres") %>
+        <%= link_to "Studios", studios_path, class: ("active" if controller_name == "studios") %>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>

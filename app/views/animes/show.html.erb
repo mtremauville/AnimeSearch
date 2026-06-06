@@ -1,2 +1,50 @@
-<h1>Animes#show</h1>
-<p>Find me in app/views/animes/show.html.erb</p>
+<article class="anime-show">
+  <%= link_to animes_path, class: "back-link" do %>
+    &#8592; Retour aux résultats
+  <% end %>
+
+  <div class="anime-show__header" style="margin-top: 16px;">
+    <img src="<%= @anime.image_url %>" alt="<%= @anime.title %>">
+
+    <div class="anime-show__meta">
+      <h1><%= @anime.title %></h1>
+
+      <% if @anime.title_english.present? && @anime.title_english != @anime.title %>
+        <p class="title-en"><%= @anime.title_english %></p>
+      <% end %>
+
+      <div class="anime-show__stats">
+        <div class="stat-item">
+          <div class="stat-label">Score</div>
+          <div class="stat-value score-value">★ <%= @anime.score || "N/A" %></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Épisodes</div>
+          <div class="stat-value"><%= @anime.episodes || "?" %></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Année</div>
+          <div class="stat-value"><%= @anime.year || "?" %></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Statut</div>
+          <div class="stat-value" style="font-size:12px;"><%= @anime.status %></div>
+        </div>
+      </div>
+
+      <div class="anime-show__tags">
+        <% @anime.genres.each do |genre| %>
+          <%= link_to genre.name, genre_path(genre), class: "tag tag--genre" %>
+        <% end %>
+        <% @anime.studios.each do |studio| %>
+          <%= link_to studio.name, studio_path(studio), class: "tag tag--studio" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="anime-show__synopsis">
+    <h2>Synopsis</h2>
+    <p><%= @anime.synopsis.presence || "Aucun synopsis disponible." %></p>
+  </div>
+</article>

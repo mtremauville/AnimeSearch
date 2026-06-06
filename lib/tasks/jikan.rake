@@ -1,4 +1,3 @@
-# lib/tasks/jikan.rake
 namespace :jikan do
   desc "Import top animes from Jikan API"
   task :import, [:pages] => :environment do |_, args|
@@ -17,5 +16,9 @@ namespace :jikan do
   end
 
   desc "Import + reindex"
-  task :sync, [:pages] => [:import, :reindex]
+  task :sync, [:pages] => :environment do |_, args|
+    pages = (args[:pages] || 5).to_i
+    Rake::Task["jikan:import"].invoke(pages)
+    Rake::Task["jikan:reindex"].invoke
+  end
 end

@@ -1,4 +1,3 @@
-# app/services/jikan_sync_service.rb
 class JikanSyncService
   BASE_URL    = "https://api.jikan.moe/v4"
   MAX_RETRIES = 3

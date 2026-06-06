@@ -27,3 +27,11 @@
 #   # Report violations without enforcing the policy.
 #   # config.content_security_policy_report_only = true
 # end
+# config/initializers/content_security_policy.rb
+Rails.application.config.content_security_policy do |policy|
+  policy.default_src :self, :https
+  policy.script_src  :self, "https://cdn.jsdelivr.net", :unsafe_inline
+  policy.connect_src :self, "https://*.algolia.net", "https://*.algolianet.com"
+  policy.img_src     :self, :https, :data
+  policy.style_src   :self, :https, :unsafe_inline
+end

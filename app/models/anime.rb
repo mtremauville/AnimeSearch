@@ -37,6 +37,10 @@ class Anime < ApplicationRecord
       "desc(score)",
       "desc(episodes)"
     ]
+    attributesToHighlight ["title", "title_english", "synopsis"]
+    attributesToSnippet   ["synopsis:30"]
+
+    typoTolerance "min"
   end
 
   # ← ajouter cette méthode

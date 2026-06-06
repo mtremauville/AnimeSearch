@@ -1,2 +1,52 @@
-<h1>Animes#index</h1>
-<p>Find me in app/views/animes/index.html.erb</p>
+<div id="search-container"
+     data-controller="instantsearch"
+     data-instantsearch-app-id-value="<%= ENV['ALGOLIA_APP_ID'] %>"
+     data-instantsearch-index-value="animes_<%= Rails.env %>"
+     data-instantsearch-search-key-value="<%= ENV['ALGOLIA_SEARCH_ONLY_KEY'] %>">
+
+  <div class="search-bar-wrap">
+    <div id="searchbox"></div>
+    <div class="search-meta">
+      <div id="stats"></div>
+      <div id="sort-by"></div>
+    </div>
+  </div>
+
+  <div class="search-layout">
+    <aside class="filters">
+      <div class="filter-section">
+        <div class="filter-title">Genres</div>
+        <div id="genres-list"></div>
+      </div>
+
+      <div class="filter-divider"></div>
+
+      <div class="filter-section">
+        <div class="filter-title">Studios</div>
+        <div id="studios-list"></div>
+      </div>
+
+      <div class="filter-divider"></div>
+
+      <div class="filter-section">
+        <div class="filter-title">Année</div>
+        <div id="year-menu"></div>
+      </div>
+
+      <div class="filter-divider"></div>
+
+      <div class="filter-section">
+        <div class="filter-title">Statut</div>
+        <div id="status-menu"></div>
+      </div>
+
+      <div class="filter-divider"></div>
+      <div id="clear-filters"></div>
+    </aside>
+
+    <main class="hits-main">
+      <div id="hits"></div>
+      <div id="pagination"></div>
+    </main>
+  </div>
+</div>

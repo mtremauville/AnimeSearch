@@ -1,4 +1,3 @@
-# lib/tasks/algolia.rake
 namespace :algolia do
   desc "Configure replica indexes for sorting"
   task setup_replicas: :environment do
