@@ -30,8 +30,9 @@
 # config/initializers/content_security_policy.rb
 Rails.application.config.content_security_policy do |policy|
   policy.default_src :self, :https
-  policy.script_src  :self, "https://cdn.jsdelivr.net", :unsafe_inline
-  policy.connect_src :self, "https://*.algolia.net", "https://*.algolianet.com"
+  policy.script_src  :self, "https://cdn.jsdelivr.net", :unsafe_inline, :unsafe_eval
+  policy.connect_src :self, "https://*.algolia.net", "https://*.algolianet.com",
+                     "https://*.algolia.io"
   policy.img_src     :self, :https, :data
   policy.style_src   :self, :https, :unsafe_inline
 end
